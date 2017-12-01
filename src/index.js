@@ -10,17 +10,17 @@ import reducer from './reducers/index';
 
 
 const logger = store => next => action => {
-  console.warn('prev state', store.getState());
-  console.warn('action', action);
+  console.log('prev state', store.getState());
+  console.log('action', action);
   next(action);
   const result = next(action);
-  console.warn('next state', store.getState());
+  console.log('next state', store.getState());
   return result
 };
-export const table = {row:
-    {"row": 2, "column": 2},};
+// export const table = {row:
+//     {"row": 2, "column": 2},};
 
-const store = createStore(reducer,compose(applyMiddleware(thunk, logger), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

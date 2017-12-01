@@ -1,100 +1,80 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './Cell.scss';
-const GetRow = (a) => {
-    const abba = a; 
-    console.log(a)
-};
-const GetColumn = (b) =>{
-    const babba = b;
-    console.log(b)
-} 
+
 class Cell extends React.PureComponent {
-    constructor(props) {
-      super(props);
-      console.log(props)
-      this.state = {
-          number: 1,
-          click: false
-      }
-      this.changeVal = this.changeVal.bind(this);
-      this.changeClick = this.changeClick.bind(this);
-      console.log(GetRow)
-     
-    }
+  constructor(props) {
+  super(props);
+  console.log(props)
+  this.state = {
+    number: 1,
+    click: false
+  }
+  this.changeVal = this.changeVal.bind(this);
+  this.changeClick = this.changeClick.bind(this); 
+}
 
-    changeVal(event) {
-        const number = event.target.value;
-        this.setState({ number });
-    }
+changeVal(event) {
+  const number = event.target.value;
+  console.log(number);
+  this.setState({ number });
+}
 
-    changeClick() {
-        this.setState({
-            click: !this.state.click,
-          });
-          const click = this.state.click ? 'true' : 'false'
-    }
+changeClick() {
+  this.setState({
+    click: !this.state.click,
+  });
+  const click = this.state.click ? 'true' : 'false'
+}
 
-    addReact() {
-         const elem = <tr>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
-                    </tr>
-    return elem    
-} 
-
-selectColumn() {
-    console.log('column')
+selectColumn(a) {
+    console.log('Selected column '+a.target.id);
 }
 
 render() {
     console.log(this.props)
   return (
     <div >
-    <table>
-        
+      <table>
         <caption>Table</caption>
         <tbody>
-            {this.props.column.map((a,index)=>
-            <td key = {index} onClick={this.selectColumn}>
-                <span>Hi</span>
-            </td>)}
-            
-            {this.props.row.map((a,index)=>
-            
-            <tr key={index}>
-            
-            {this.props.column.map((a,index)=>
-            <td key={index} onClick={this.changeClick} 
-                className="cell_container">
-            <input 
-            type="text"
-            value={this.state.number}
-            onChange={this.changeVal}
-            name={"number1"}/>
-            </td>)}
-            {/* <td onClick={this.changeClick} className="cell_container">
-            <input 
-            type="text"
-            value={this.state.number}
-            onChange={this.changeVal}
-            name={"number2"}/>
-            </td> */}
-          </tr>)}
-          
+          {this.props.column.map((a)=>
+          <td 
+              key={a.id} 
+              onClick={this.selectColumn}>
+              <button id={a.id}>Select</button>
+          </td>
+          )}
+          {this.props.row.map((a)=>
+              <tr key={a.id}>
+          {this.props.column.map((a)=>
+              <td 
+                onClick={this.changeClick} 
+                className="cell_container"
+                key={a.id}>
+              <input 
+                type="text"
+                value={a.column}
+                onChange={this.props.val}
+                name={a.id}/>
+              </td>)}
+              </tr>)}
         </tbody>
-    </table>
+      </table>
     </div>
   );
 }
 }
 
+const Val = (a) => {
+    console.log(a);
+}
 
 export default connect(
     state => ({ 
         row: state.row,
-        column: state.column
+        column: state.column,
+        value: Val(state.value),
     }),
-    dispatch => ({  }),
-  
+    dispatch => ({ })
   )(Cell);
