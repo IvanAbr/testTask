@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Cell from './components/Cell/Cell.jsx';
-import Button from './components/Button/Button.jsx';
+import Buttons from './components/Button/Button.jsx';
 
 
 class App extends React.PureComponent {
@@ -16,32 +16,27 @@ class App extends React.PureComponent {
 
 addRow() {
   var counter = (function(){
-    var row = {row:1,id:1};
+    var row = {row:1,idRow:1};
       return function() {
-        return {row:row.row++,id:row.id++};
+        return {row:row.row++,idRow:row.idRow++};
       }
     }())
-    this.props.getRow(counter());
+    this.props.getRow();
 }
 
 addColumn() {
-  const column = {column: 2,id:2};
-  this.props.getColumn(column);
-  this.props.changeVal(column.column, column.id);
+  const column = {column: 2,idColumn:2};
+  this.props.getColumn();
 }
 
 changeValue(a) {
-  console.log(a.target)  
-  this.props.changeVal(a.target.value, a.target.name);
-  this.value = a.target.value
-  this.forceUpdate();
+  this.props.changeVal(a.target.value, a.target.name, a.target.id);
   }
 
 render() {
-  localStorage.setItem('row', 'row')
   return (
     <div className = 'container'>
-      <Button row={this.addRow} column={this.addColumn}/>
+      <Buttons row={this.addRow} column={this.addColumn}/>
       <Cell val={this.changeValue}/>
     </div>
     );
@@ -57,8 +52,8 @@ export default connect(
       getColumn: (column) => {
           dispatch({ type: 'ADD_COLUMN', column })
       },
-      changeVal: (value,id) => {
-          dispatch({ type: 'CHANGE_VALUE', value, id })
+      changeVal: (value,idColumn,idRow) => {
+          dispatch({ type: 'CHANGE_VALUE', value, idColumn, idRow })
       } 
   })
 )(App);

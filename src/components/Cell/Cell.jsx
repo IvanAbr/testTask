@@ -5,34 +5,17 @@ import './Cell.scss';
 class Cell extends React.PureComponent {
   constructor(props) {
   super(props);
-  console.log(props)
-  this.state = {
-    number: 1,
-    click: false
-  }
-  this.changeVal = this.changeVal.bind(this);
-  this.changeClick = this.changeClick.bind(this); 
-}
-
-changeVal(event) {
-  const number = event.target.value;
-  console.log(number);
-  this.setState({ number });
-}
-
-changeClick() {
-  this.setState({
-    click: !this.state.click,
-  });
-  const click = this.state.click ? 'true' : 'false'
+  this.selectColumn = this.selectColumn.bind(this); 
 }
 
 selectColumn(a) {
     console.log('Selected column '+a.target.id);
+    const data = (this.props.value.filter((b,i)=>b.idColumn==a.target.id && b.idRow!==i ));
+    console.log(data);
 }
 
 render() {
-    console.log(this.props)
+    localStorage.setItem('row', '1');    
   return (
     <div >
       <table>
@@ -40,23 +23,25 @@ render() {
         <tbody>
           {this.props.column.map((a)=>
           <td 
-              key={a.id} 
+              key={a.idColumn} 
               onClick={this.selectColumn}>
-              <button id={a.id}>Select</button>
+              <button id={a.idColumn}>Select</button>
           </td>
           )}
           {this.props.row.map((a)=>
-              <tr key={a.id}>
-          {this.props.column.map((a)=>
+              <tr key={a.idRow} id={a.idRow}>
+          {this.props.column.map((item)=>
               <td 
+                
                 onClick={this.changeClick} 
                 className="cell_container"
-                key={a.id}>
+                key={item.idColumn}>
               <input 
+                id={a.idRow}
                 type="text"
-                value={a.column}
+                defaultValue={item.column}
                 onChange={this.props.val}
-                name={a.id}/>
+                name={item.idColumn}/>
               </td>)}
               </tr>)}
         </tbody>
@@ -66,15 +51,11 @@ render() {
 }
 }
 
-const Val = (a) => {
-    console.log(a);
-}
-
 export default connect(
     state => ({ 
         row: state.row,
         column: state.column,
-        value: Val(state.value),
+        value: state.value,
     }),
     dispatch => ({ })
   )(Cell);

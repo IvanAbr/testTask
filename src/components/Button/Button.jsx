@@ -1,7 +1,7 @@
 import React from 'react';
 import './Button.scss';
 
-function Button(props) {
+function Buttons(props) {
     console.log(props)
   return (
     <div className="button_container">
@@ -10,4 +10,4 @@ function Button(props) {
     </div>
   );
 }
-export default Button;
+export default Buttons;
