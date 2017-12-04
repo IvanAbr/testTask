@@ -10,13 +10,21 @@ class Cell extends React.PureComponent {
 
 selectColumn(a) {
     console.log('Selected column '+a.target.id);
-    const data = (this.props.value.filter((b,i)=>b.idColumn==a.target.id && b.idRow!==i ));
-    console.log(data);
+    const data = (this.props.value.filter((item,i,arr)=>item.idColumn==a.target.id));
+    console.log(data);  
 }
 
 render() {
-    localStorage.setItem('row', '1');    
+    let rowsLocal = JSON.stringify(this.props.row);
+    localStorage.setItem('state row', rowsLocal); 
+    let localValue = (localStorage.getItem('state row'));
+    console.log(localValue);
+    let tests = JSON.parse(localValue);
+    console.log(tests);
+    localStorage.setItem('state column', this.props.column.map((a)=>a.column));
+    localStorage.setItem('state value', this.props.value.map((a)=>a.value)); 
   return (
+     
     <div >
       <table>
         <caption>Table</caption>
@@ -28,7 +36,23 @@ render() {
               <button id={a.idColumn}>Select</button>
           </td>
           )}
-          {this.props.row.map((a)=>
+          { tests ? tests.map((a)=>
+              <tr key={a.idRow} id={a.idRow}>
+          {this.props.column.map((item)=>
+              <td 
+                
+                onClick={this.changeClick} 
+                className="cell_container"
+                key={item.idColumn}>
+              <input 
+                id={a.idRow}
+                type="text"
+                defaultValue={item.column}
+                onChange={this.props.val}
+                name={item.idColumn}/>
+              </td>)}
+              </tr>) :
+              this.props.row.map((a)=>
               <tr key={a.idRow} id={a.idRow}>
           {this.props.column.map((item)=>
               <td 
