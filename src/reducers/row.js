@@ -1,9 +1,12 @@
-import initialState from './../initialState'
-export default function addRow(state = [{row: 1,idRow:1}], action) {
-    if (action.type === 'ADD_ROW') {
-      return state = [...state, {row:state[0].row++,idRow:state[0].idRow++}];
-    }
-    return state;
+import { ADD_ROW } from './../const/row';
+
+function addRow(state = [ {idRow: 1}], action) {
+  console.log(action)
+  switch (action.type) {
+    case  ADD_ROW:
+      return  state = [...state, {idRow:state[0].idRow++}];
+  default: return state;
   }
+}
   
-  
+export default addRow;

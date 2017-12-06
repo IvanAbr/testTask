@@ -1,9 +1,11 @@
-import initialState from './../initialState'
-export default function changeValue(state = [], action) {
-    if (action.type === 'CHANGE_VALUE') {
-      return [...state,{value:action.value,idColumn:action.idColumn,idRow:action.idRow}];
-    }
-    return state;
+import {CHANGE_VALUE} from './../const/value'
+
+function changeValue(state = [], action) {
+  switch (action.type)  {
+    case CHANGE_VALUE:
+      return {value:action.value,idColumn:action.idColumn,idRow:action.idRow};
+    default:return state;
   }
+}
   
-  
+export default changeValue;  

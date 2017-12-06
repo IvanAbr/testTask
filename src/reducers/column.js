@@ -1,9 +1,23 @@
+import {ADD_COLUMN} from './../const/column'
 
-export default function addColumn(state = [{column: 1, idColumn: 1}], action) {
-    if (action.type === 'ADD_COLUMN') {
-      return state = [...state, {column:state[0].column++,idColumn:state[0].idColumn++}];
+const initialState = {
+    column: [{column:1,id:1}],
+    row: [{row:1,id:1}],
+    id: {
+      idRow:1,
+      idColumn:1,
+      value:1,
+      id:1
     }
-    return state;
   }
-  
-  
+
+function addColumn(state = initialState, action) {
+    console.log(action)
+    switch (action.type) {
+      case ADD_COLUMN:
+        return  state = Object.assign({ column:[...state.column,{column:state.column[0].column++}] }, state);
+      default: return state;
+    }
+  }
+
+  export default addColumn;
