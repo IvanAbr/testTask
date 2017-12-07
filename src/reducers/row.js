@@ -1,4 +1,4 @@
-import { ADD_ROW } from './../const/row';
+import { ADD_ROW } from './../consts/consts';
 
 const initialState = [
     {idRow:Math.round(Math.random()*1000)}

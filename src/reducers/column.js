@@ -1,4 +1,4 @@
-import {ADD_COLUMN} from './../const/column'
+import {ADD_COLUMN} from './../consts/consts'
 
 const initialState = [
     {idColumn:Math.round(Math.random()*1000)}

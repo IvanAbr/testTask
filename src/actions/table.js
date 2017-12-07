@@ -1,26 +1,25 @@
-import {GET_CELL} from '../const/cell';
-import {ADD_ROW} from '../const/row';
-import {ADD_COLUMN} from '../const/column';
-import {CHANGE_VALUE} from '../const/value';
+import {GET_CELL, ADD_ROW, ADD_COLUMN, CHANGE_VALUE} from './../consts/consts';
 
-export const GetCell = (idRow,idColumn,value) => ({
+
+export const getCell = (idRow,idColumn,value, id) => ({
   type: GET_CELL,
   idRow,
   idColumn,
-  value
+  value, 
+  id
 });
 
-export const AddRow = (row) => ({
+export const addRow = (row) => ({
     type: ADD_ROW,
     row
 })
 
-export const AddColumn = (column) => ({
+export const addColumn = (column) => ({
   type: ADD_COLUMN,
   column
 });
 
-export const ChangeValue = (value,idColumn,idRow) => ({
+export const changeValue = (value,idColumn,idRow) => ({
   type: CHANGE_VALUE,
   value,
   idColumn,

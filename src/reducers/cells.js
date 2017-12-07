@@ -1,4 +1,4 @@
-import {GET_CELL} from './../const/cell';
+import {GET_CELL} from './../consts/consts';
 
 const initialState = {
     id: {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './Cell.scss';
 import Row from './../Row/Row.jsx';
 import Column from './../Column/Column.jsx';
@@ -10,15 +11,11 @@ class Table extends React.PureComponent {
   this.selectColumn = this.selectColumn.bind(this); 
 }
 
-selectColumn(a) {
-    console.log('Selected column '+a.target.id);
-    
-    // const data = (this.props.value.filter((item,i,arr)=>item.idColumn==a.target.id));
-    //console.log(data);  
+selectColumn(e) {
+    console.log('Selected column '+e.target.id);
 }
 
 render() {
-    console.log(this.props)
   return (
      
     <div>
@@ -49,6 +46,10 @@ render() {
     </div>
   );
  }
+}
+
+Table.propTypes = {
+    val: PropTypes.func.isRequired
 }
 
 export default connect(

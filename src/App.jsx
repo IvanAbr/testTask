@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Cell from './components/Cell/Cell.jsx';
 import Button from './components/Button/Button.jsx';
-import { GetCell } from './actions/table';
-import { AddRow } from './actions/table';
-import { AddColumn } from './actions/table';
-import { ChangeValue } from './actions/table';
+import { getCell, addRow, addColumn, changeValue } from './actions/table';
 import { asyncLocalStorage } from './actions/localStorage';
 
 class App extends React.PureComponent {
@@ -18,30 +15,17 @@ class App extends React.PureComponent {
     this.changeValue = this.changeValue.bind(this);
   }
 
-addRow(a) {
-  let rows = ++a.target.value;
-  console.log(rows+' Row')
-  let column = 0;
-  this.props.getRow();
-  //this.props.getCell();
+addRow(e) {
+  this.props.handleRow();
 }
 
-addColumn(a) {
-  let rows = 0;
-  let column = ++a.target.value;
-  console.log(column+' Column')
-  this.props.getColumn(rows,column);
-  //this.props.getCell();
+addColumn(e) {
+  this.props.handleColumn();
 }
 
-changeValue(a) {
-  //this.props.changeVal(a.target.value, a.target.name, a.target.id);
-  console.log( a.target.id,a.target.name,a.target.value);
-  this.props.getCell( a.target.id,a.target.name,a.target.value );
-  }
-
-counterVal() {
-
+changeValue(e) {
+  console.log( e.target.id,e.target.name,e.target.value);
+  this.props.getCell( e.target.id,e.target.name,e.target.value, Math.round(Math.random()*1000));
 }
 
 componentDidMount() {
@@ -65,23 +49,25 @@ render() {
 App.propTypes = {
     getCell: PropTypes.func.isRequired,
     getLocalStorage: PropTypes.func.isRequired,
+    handleColumn: PropTypes.func.isRequired,
+    handleRow: PropTypes.func.isRequired
 }
 
 export default connect(
  null,
   dispatch => ({
-      getCell: (idRow,idColumn,value) => {
-          dispatch(GetCell(idRow,idColumn,value))
+      getCell: (idRow,idColumn,value,id) => {
+          dispatch(getCell(idRow,idColumn,value, id))
       },
-      getColumn: () => {
-          dispatch(AddColumn())
+      handleColumn: () => {
+          dispatch(addColumn())
       },
-      getRow: () => {
-          dispatch(AddRow())
+      handleRow: () => {
+          dispatch(addRow())
       },
-      changeVal: (value,idColumn,idRow) => {
-          dispatch(ChangeValue(value,idColumn,idRow))
-      },
+    //   changeVal: (value,idColumn,idRow) => {
+    //       dispatch(changeValue(value,idColumn,idRow))
+    //   },
       getLocalStorage: () => {
         dispatch(asyncLocalStorage())
       } 

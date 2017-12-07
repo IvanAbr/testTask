@@ -1,4 +1,4 @@
-import {CHANGE_VALUE} from './../const/value'
+import {CHANGE_VALUE} from './../consts/consts';
 
 function changeValue(state = [], action) {
   switch (action.type)  {
