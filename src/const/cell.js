@@ -1,1 +1,1 @@
-export const ADD_CELL = 'ADD_CELL';
+export const GET_CELL = 'GET_CELL';

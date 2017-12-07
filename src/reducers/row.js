@@ -1,10 +1,13 @@
 import { ADD_ROW } from './../const/row';
 
-function addRow(state = [ {idRow: 1}], action) {
-  console.log(action)
+const initialState = [
+    {idRow:Math.round(Math.random()*1000)}
+]
+
+function addRow(state = initialState, action) {
   switch (action.type) {
     case  ADD_ROW:
-      return  state = [...state, {idRow:state[0].idRow++}];
+      return  [...state, {idRow:Math.round(Math.random()*1000)}];
   default: return state;
   }
 }

@@ -10,6 +10,7 @@ const reducer = combineReducers({
   cells,
   column,
   row,
+  value
   //async
 });
 

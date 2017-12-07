@@ -1,23 +1,21 @@
-import {ADD_CELL} from './../const/cell';
+import {GET_CELL} from './../const/cell';
 
 const initialState = {
-  column: [{column:1,id:1}],
-  row: [{row:1,id:1}],
-  id: {
+    id: {
     idRow:1,
     idColumn:1,
     value:1,
-    id:1
+    id:Math.round(Math.random()*1000)
   }
 }
 
-function addCell(state = initialState, action) {
+function getCell(state = initialState, action) {
   console.log(action)
   switch (action.type) {
-    case  ADD_CELL:
-      return  state = Object.assign({ id: {idRow:state.id.idRow++,idColumn:state.id.idColumn++,value:state.id.value++,id:state.id.id++}},state);
+    case  GET_CELL:
+      return  {...state, id: {idRow:action.idRow,idColumn:action.idColumn,value:action.value,id:state.id.id}};
   default: return state;
   }
 }
   
-export default addCell;
+export default getCell;

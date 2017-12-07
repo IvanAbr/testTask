@@ -2,19 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.scss';
 
-function Buttons(props) {
+function Button(props) {
   console.log(props)
   return (
-    <div className="buttons">
-      <button type="button" onClick={props.row} >Add row</button>
-      <button type="button" onClick={props.column} >Add column</button>
-    </div>
+      <button type="button" onClick={props.handleFunc} >{props.text}</button>
   );
 }
 
-Buttons.propTypes = {
-  row: PropTypes.func.isRequired,
-  column: PropTypes.func.isRequired,
+Button.propTypes = {
+  handleFunc: PropTypes.func.isRequired,
 }
 
-export default Buttons;
+export default Button;
