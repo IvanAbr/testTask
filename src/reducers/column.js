@@ -1,13 +1,15 @@
 import {ADD_COLUMN} from './../consts/consts'
 
+var shortid = require('shortid');
+
 const initialState = [
-    {idColumn:Math.round(Math.random()*1000)}
+    {idColumn:shortid.generate()}
 ]
 
 function addColumn(state = initialState, action) {
     switch (action.type) {
       case ADD_COLUMN:
-        return [...state, {idColumn:Math.round(Math.random()*1000)}];
+        return [...state, {idColumn:shortid.generate()}];
       default: return state;
     }
   }

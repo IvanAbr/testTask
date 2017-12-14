@@ -1,21 +1,20 @@
-import {GET_CELL} from './../consts/consts';
+import {ADD_CELL} from './../consts/consts';
+var shortid = require('shortid');
 
 const initialState = {
-    id: {
-    idRow:1,
-    idColumn:1,
-    value:1,
-    id:Math.round(Math.random()*1000)
+    ['id '+shortid.generate()] : {
+    value:'',
+    id:shortid.generate()
   }
 }
 
-function getCell(state = initialState, action) {
+function addCell(state = initialState, action) {
   console.log(action)
   switch (action.type) {
-    case  GET_CELL:
-      return  {...state, id: {idRow:action.idRow,idColumn:action.idColumn,value:action.value,id:state.id.id}};
+    case  ADD_CELL:
+      return  {...state, ['id '+shortid.generate()] : {id:action.id,value:action.value}};
   default: return state;
   }
 }
   
-export default getCell;
+export default addCell;

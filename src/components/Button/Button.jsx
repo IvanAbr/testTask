@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.scss';
 
-function Button(props) {
-  console.log(props)
+function Button({ handleFunc,text }) {
   return (
-      <button type="button" onClick={props.handleFunc}>{props.text}</button>
+      <button type="button" onClick={handleFunc}>{text}</button>
   );
 }
 

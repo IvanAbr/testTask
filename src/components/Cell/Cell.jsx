@@ -36,7 +36,7 @@ render() {
                 <Column 
                   key={item.idColumn} 
                   classForName={"cell_container"} 
-                  input={<input id={a.idRow} type="text" value={a.value} onChange={this.props.val} name={item.idColumn}/>}
+                  input={<input id={a.idRow} type="text" value={a.value} onChange={this.props.handleValue} name={item.idColumn}/>}
                 />
               )}
             </tr>
@@ -49,7 +49,8 @@ render() {
 }
 
 Table.propTypes = {
-    val: PropTypes.func.isRequired
+    handleValue: PropTypes.func.isRequired,
+    addCell: PropTypes.func.isRequired,
 }
 
 export default connect(

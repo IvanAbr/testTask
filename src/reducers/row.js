@@ -1,13 +1,15 @@
 import { ADD_ROW } from './../consts/consts';
 
+var shortid = require('shortid');
+
 const initialState = [
-    {idRow:Math.round(Math.random()*1000)}
+    {idRow:shortid.generate()}
 ]
 
 function addRow(state = initialState, action) {
   switch (action.type) {
     case  ADD_ROW:
-      return  [...state, {idRow:Math.round(Math.random()*1000)}];
+      return  [...state, {idRow:shortid.generate()}];
   default: return state;
   }
 }
